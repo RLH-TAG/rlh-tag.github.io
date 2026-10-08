@@ -15,7 +15,6 @@ hidden: yes
 | **Haematology lab: coagulation** (out of hours)<br><small>From [Code Black](#code-black)</small> | **Ext 61049, 60342** |
 | **Haematology Lab: Code Red** (request CODE RED PACK A or B)<br><small>From [Code Red: Activation](#rats-code-red-activation)</small> | **Ext 61108** |
 | **Haematology Lab: Code Red** (step down CODE RED)<br><small>From [Code Red: Activation](#rats-code-red-activation)</small> | **Ext 61117 / Ext 60344** |
-| **Switchboard** (request Trauma Shock call)<br><small>From [Trauma Shock Call](#rats-ecmo.shock-call)</small> | **40666** |
 | **Trauma Shock Call MDT**<br><small>From [Trauma Shock Call](#rats-ecmo.shock-call)</small> | **0121 285 8116** |
 | **Obstetric consultant**<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45635** |
 | **Neonatal team** (consultant)<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45666** |
