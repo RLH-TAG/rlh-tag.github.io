@@ -1,8 +1,30 @@
 title: Phone Numbers (Accurx)
 group: logistics
-footer: Accurx is a separate app. You need to be signed in to Accurx to see the directory.
+footer: Numbers taken from the TAG clinical practice guidelines (2025) and the RATS handbook, version 3.3. Accurx is a separate app; you need to be signed in to see its directory.
 hidden: yes
 ---
+## Directory
+
+> **If a number doesn't work, check Accurx**, then use the Feedback button below to tell the TAG team so we can update the site.
+
+| | |
+|---|---|
+| **Emergency Call**<br><small>From Code Black, Pregnant Trauma</small> | **2222** |
+| **Anaesthetist** (Code Black)<br><small>From [Code Black](#code-black)</small> | **1220** |
+| **Haematology SpR**<br><small>From [Code Black](#code-black)</small> | **Bleep 1155** (in hours, via switch out-of-hours) |
+| **Haematology lab** (out of hours)<br><small>From [Code Black](#code-black)</small> | **Ext 61049, 60342** |
+| **Haematology Lab** (request CODE RED PACK A or B)<br><small>From [Code Red: Activation](#rats-code-red-activation)</small> | **Ext 61108** |
+| **Haematology Lab** (step down CODE RED)<br><small>From [Code Red: Activation](#rats-code-red-activation)</small> | **Ext 61117 / Ext 60344** |
+| **Switchboard** (request Trauma Shock call)<br><small>From [Trauma Shock Call](#rats-ecmo.shock-call)</small> | **40666** |
+| **Trauma Shock Call MDT** (dial within 1 min)<br><small>From [Trauma Shock Call](#rats-ecmo.shock-call)</small> | **0121 285 8116** |
+| **Obstetric consultant**<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45635** |
+| **Neonatal team** (consultant)<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45666** |
+| **Neonatal team** (SpR)<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45853** |
+| **Labour Ward coordinator**<br><small>From [Pregnant Trauma](#pregnant-trauma)</small> | **45636** |
+| **TPOPS**<br><small>From [Elderly Trauma](#elderly-trauma)</small> | **Dect Phone 45703** |
+
+<p><button type="button" class="appbtn" data-feedback>Feedback: report a number</button></p>
+
 ## Find a number in Accurx
 
 Royal London Hospital phone numbers, extensions and bleeps are in the Accurx app directory.
@@ -20,4 +42,3 @@ On an iPhone with Accurx installed, this opens the app at your inbox. From there
 
 - [Accurx on the App Store (iPhone)](https://apps.apple.com/gb/app/accurx/id604873500)
 - [Accurx on Google Play (Android)](https://play.google.com/store/apps/details?id=com.hermes.induction)
-
