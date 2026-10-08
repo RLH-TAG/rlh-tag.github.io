@@ -10,7 +10,7 @@ VERSION = STAMP.strftime("%Y%m%d-%H%M")
 BUILD_LABEL = STAMP.strftime("%-d %b %Y")
 # Visit counting (GoatCounter). Put the site code here, e.g. "tag-handbook" for tag-handbook.goatcounter.com.
 # Leave empty to switch counting off.
-COUNTER = ""
+COUNTER = "rlh-tag"
 
 if OUT.exists(): shutil.rmtree(OUT)
 (OUT / "fonts").mkdir(parents=True); (OUT / "icons").mkdir()

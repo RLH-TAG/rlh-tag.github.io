@@ -14,7 +14,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<!-- build 20261008-1149 -->
+<!-- build 20261008-1259 -->
 <style>
 @font-face{font-family:"Lexend";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/lexend-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:"Lexend";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/lexend-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -333,6 +333,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.9)}
   <div class="lb-body" id="lb-body"><img id="lb-img" alt=""></div>
 </dialog>
 
+<script data-goatcounter="https://rlh-tag.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 <script>
 const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
 const BUILD_LABEL = "8 Oct 2026";
@@ -382,7 +383,7 @@ addEventListener("load", () => { const t = setInterval(() => { if (window.goatco
 window.APP = {
   homeTop: () => (standalone || installHidden) ? "" : `<div class="getapp"><button type="button" class="go" data-install>Add to Home Screen</button><button type="button" class="no" data-install-no>Not now</button></div>`,
   updated: () => ` · Updated ${BUILD_LABEL}`,
-  homeBottom: () => ``,
+  homeBottom: () => `<p class="install">Anonymous visit counts are collected; no personal data is stored.</p>`,
   view: (path, title) => { countView(path, title); return ""; },
 };
 if ("serviceWorker" in navigator) {
