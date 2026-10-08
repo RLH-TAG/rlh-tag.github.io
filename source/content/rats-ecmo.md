@@ -34,3 +34,5 @@ In trauma, VA ECMO has an evolving use for **refractory cardiogenic shock.**
 ## Trauma Shock Call
 
 ![Trauma Shock Call](fig/rats-shock-call.jpg)
+
+Numbers on this card may be out of date — [check Accurx](#phone-numbers).
