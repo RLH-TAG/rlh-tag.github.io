@@ -14,7 +14,7 @@ ORDER = ["code-red", "rotem-algorithm", "code-black", "ed-rsi",
          "rats-resus-bay-8", "rats-marched", "rats-major-incident",
          # reached from Quick access only
          "rats-baste", "rats-code-red-activation",
-         "phone-numbers", "acknowledgements"]
+         "rotem-fc-trial", "phone-numbers", "acknowledgements"]
 GROUPS = {
     "resus": "Resuscitation",
     "airway": "Airway",
