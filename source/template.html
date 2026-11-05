@@ -432,8 +432,9 @@ function saveOpenGroups(){
   try { sessionStorage.setItem("tag-open", JSON.stringify(open)); } catch(e) {}
 }
 
-/* feedback: sent to the handbook owner through FormSubmit (a form-to-email service) */
-const FEEDBACK_URL = "https://formsubmit.co/ajax/4f9105d5adc948445083d24f385c4161";
+/* feedback: sent to the handbook owner through Web3Forms (a form-to-email service) */
+const FEEDBACK_URL = "https://api.web3forms.com/submit";
+const FEEDBACK_KEY = "05e24f9e-77d9-47b8-a347-b1b783538aa2";
 function openFeedback(){
   const d = $("#fb"); d.hidden = false; $("#fb-msg").hidden = true; $("#fb-send").disabled = false;
   setTimeout(() => $("#fb-text").focus(), 30);
@@ -446,7 +447,7 @@ async function sendFeedback(){
   btn.disabled = true; msg.textContent = "Sending…"; msg.className = "fb-msg"; msg.hidden = false;
   try {
     const r = await fetch(FEEDBACK_URL, {method: "POST", headers: {"Content-Type": "application/json", "Accept": "application/json"},
-      body: JSON.stringify({_subject: "TAG handbook feedback", message: text, page: location.href})});
+      body: JSON.stringify({access_key: FEEDBACK_KEY, subject: "TAG handbook feedback", from_name: "TAG handbook", message: text, page: location.href})});
     const j = await r.json().catch(() => ({}));
     if (r.ok && String(j.success) === "true") {
       msg.textContent = "Sent. Thank you for your feedback."; msg.className = "fb-msg ok"; $("#fb-text").value = "";
