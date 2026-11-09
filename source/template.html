@@ -71,6 +71,14 @@ main{max-width:1100px;margin:0 auto;padding-inline:16px;padding-block:22px 64px}
 .quick:hover{outline:2px solid var(--line-strong)}
 .quick .ql{display:block}
 .quicks.plain .quick{background:var(--surface);border:2px solid var(--line-strong)}
+.quick-card{grid-column:1/-1;background:var(--surface);border:2px solid var(--navy);border-radius:12px;padding:10px 12px 12px}
+.quick-card .qc-t{display:block;font-weight:700;font-size:1.05rem;line-height:1.25;color:var(--key-ink);margin:0 0 8px 2px}
+.quick-card .qc-b{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.quick-card .qbtn{display:flex;align-items:center;justify-content:center;min-height:3rem;border-radius:10px;padding:8px 10px;color:#fff;font-weight:700;font-size:1.05rem;text-align:center;text-decoration:none;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+.quick-card .qbtn:hover{outline:2px solid var(--line-strong)}
+.quick-card .qbtn:active{transform:translateY(1px);box-shadow:none}
+.quick-card .aud-a{background:#0B6E5F}
+.quick-card .aud-b{background:#6A2C8F}
 .group.emerg{margin-top:22px}
 /* guideline groups as drop-downs */
 .dds{display:flex;flex-direction:column;gap:10px;margin-top:30px}
@@ -406,6 +414,7 @@ const QUICK = [
   {label: "ROTEM (fibrinogen concentrate trial)", slug: "rotem-fc-trial", page: true},
   {label: "Trauma Shock Call",          slug: "rats-ecmo",                anchor: "shock-call"},
   {label: "Phone numbers (Accurx)",     slug: "phone-numbers",            page: true},
+  {label: "Chest Wall Block Audit", links: [{label: "Assessment", cls: "aud-a", url: "https://forms.cloud.microsoft/pages/responsepage.aspx?id=slTDN7CF9UeyIge0jXdO40paWMNkhM5Kh6usTrEqTW5UN00wNUUyN0IxT0hYVFQxSTREVklLTTIwRi4u&route=shorturl"}, {label: "Follow up", cls: "aud-b", url: "https://forms.cloud.microsoft/pages/responsepage.aspx?id=slTDN7CF9UeyIge0jXdO40paWMNkhM5Kh6usTrEqTW5URTg3M0NDQkpBQUhPWE9RSlE2TFAwOEpNUi4u&route=shorturl"}]},
 ];
 /* pages kept off the group lists because Quick access already leads to them */
 const OFF_LIST = new Set(["rotem-algorithm"]);
@@ -416,6 +425,7 @@ function qLabel(t){
 }
 function quickLinks(list){
   return list.map(e => {
+    if (e.links) return `<div class="quick-card"><span class="qc-t">${esc(e.label)}</span><div class="qc-b">${e.links.map(l => `<a class="qbtn ${l.cls}" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("")}</div></div>`;
     const c = BY[e.slug]; if (!c) return "";
     if (e.page) return `<a class="quick" href="#${e.slug}">${qLabel(e.label)}</a>`;
     if (e.anchor) return `<a class="quick" href="#${e.slug}.${e.anchor}">${qLabel(e.label)}</a>`;
