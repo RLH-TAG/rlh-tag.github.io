@@ -1,5 +1,5 @@
 // Offline support. A new build changes VERSION, which makes phones fetch the new files.
-const VERSION = "20261109-1200";
+const VERSION = "20261112-1540";
 const CACHE = "tag-handbook-" + VERSION;
 const FILES = [
   "./",

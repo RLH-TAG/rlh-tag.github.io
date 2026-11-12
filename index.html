@@ -14,7 +14,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<!-- build 20261009-1054 -->
+<!-- build 20261112-1540 -->
 <style>
 @font-face{font-family:"Lexend";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/lexend-latin-ext-wght-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:"Lexend";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/lexend-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -129,6 +129,11 @@ main{max-width:1100px;margin:0 auto;padding-inline:16px;padding-block:22px 64px}
 .fb-in{width:100%;max-width:30rem;background:var(--surface);border:2px solid var(--line-strong);border-radius:14px;padding:16px 18px}
 .fb-in h2{margin:0 0 6px;font-size:1.3rem}
 .fb-in p{margin:0 0 10px;font-size:1rem;color:var(--ink-2)}
+.fb-in .fb-q{margin:4px 0 2px;font-weight:700;color:var(--ink)}
+.stars{display:flex;gap:2px;margin:0 0 12px}
+.stars button{font-size:2.1rem;line-height:1;background:none;border:0;padding:2px 4px;cursor:pointer;color:var(--line);border-radius:8px;min-width:44px;min-height:44px}
+.stars button.on{color:#E0A800}
+.stars button:focus-visible{outline:3px solid var(--focus)}
 .fb-in textarea{width:100%;font:400 1rem/1.45 var(--f);border:2px solid var(--line-strong);border-radius:10px;padding:8px 10px;background:var(--page);color:var(--ink);resize:vertical}
 .fb-act{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
 .fb-act button{font:700 1rem var(--f);border-radius:999px;padding:8px 20px;cursor:pointer;border:2px solid var(--line-strong)}
@@ -328,6 +333,10 @@ dialog.lb::backdrop{background:rgba(0,0,0,.9)}
 <div class="fb" id="fb" hidden>
   <div class="fb-in" role="dialog" aria-modal="true" aria-labelledby="fb-h">
     <h2 id="fb-h">Feedback</h2>
+    <p class="fb-q" id="fb-q">How useful is this handbook?</p>
+    <div class="stars" id="fb-stars" role="radiogroup" aria-labelledby="fb-q">
+      <button type="button" role="radio" aria-checked="false" data-v="1" aria-label="1 star">★</button><button type="button" role="radio" aria-checked="false" data-v="2" aria-label="2 stars">★</button><button type="button" role="radio" aria-checked="false" data-v="3" aria-label="3 stars">★</button><button type="button" role="radio" aria-checked="false" data-v="4" aria-label="4 stars">★</button><button type="button" role="radio" aria-checked="false" data-v="5" aria-label="5 stars">★</button>
+    </div>
     <p>Spotted an error, or have a suggestion? Please don't include any patient details.</p>
     <label for="fb-text" class="vh">Your feedback</label>
     <textarea id="fb-text" rows="6" placeholder="Type your feedback"></textarea>
@@ -345,7 +354,7 @@ dialog.lb::backdrop{background:rgba(0,0,0,.9)}
 <script data-goatcounter="https://rlh-tag.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 <script>
 const standalone = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
-const BUILD_LABEL = "9 Oct 2026";
+const BUILD_LABEL = "12 Nov 2026";
 
 /* ---- Add to Home Screen ----
    Android/Chrome lets a page open the install prompt from a button. iPhone and iPad do not,
@@ -553,17 +562,25 @@ function openFeedback(){
   setTimeout(() => $("#fb-text").focus(), 30);
 }
 function closeFeedback(){ $("#fb").hidden = true; }
+let fbRating = 0;
+function setRating(v){
+  fbRating = v;
+  document.querySelectorAll("#fb-stars button").forEach(b => {
+    const n = +b.dataset.v; b.classList.toggle("on", n <= v); b.setAttribute("aria-checked", n === v ? "true" : "false");
+  });
+}
 async function sendFeedback(){
   const text = $("#fb-text").value.trim(), msg = $("#fb-msg"), btn = $("#fb-send");
-  if (!text) { msg.textContent = "Type your feedback first."; msg.className = "fb-msg bad"; msg.hidden = false; return; }
+  if (!text && !fbRating) { msg.textContent = "Tap a star or type your feedback first."; msg.className = "fb-msg bad"; msg.hidden = false; return; }
   if ($("#fb-hp").value) { closeFeedback(); return; }
   btn.disabled = true; msg.textContent = "Sending…"; msg.className = "fb-msg"; msg.hidden = false;
   try {
     const r = await fetch(FEEDBACK_URL, {method: "POST", headers: {"Content-Type": "application/json", "Accept": "application/json"},
-      body: JSON.stringify({access_key: FEEDBACK_KEY, subject: "TAG handbook feedback", from_name: "TAG handbook", message: text, page: location.href})});
+      body: JSON.stringify({access_key: FEEDBACK_KEY, subject: "TAG handbook feedback" + (fbRating ? " (" + fbRating + "/5)" : ""), from_name: "TAG handbook",
+        rating: fbRating ? fbRating + "/5 " + "★".repeat(fbRating) + "☆".repeat(5 - fbRating) : "not given", message: text || "(no comment)", page: location.href})});
     const j = await r.json().catch(() => ({}));
     if (r.ok && String(j.success) === "true") {
-      msg.textContent = "Sent. Thank you for your feedback."; msg.className = "fb-msg ok"; $("#fb-text").value = "";
+      msg.textContent = "Sent. Thank you for your feedback."; msg.className = "fb-msg ok"; $("#fb-text").value = ""; setRating(0);
     } else {
       msg.textContent = j.message || "Your feedback couldn't be sent. Please try again later."; msg.className = "fb-msg bad"; btn.disabled = false;
     }
@@ -757,6 +774,7 @@ document.addEventListener("click", e => {
 });
 $("#fb-cancel").addEventListener("click", closeFeedback);
 $("#fb-send").addEventListener("click", sendFeedback);
+$("#fb-stars").addEventListener("click", e => { const b = e.target.closest("button[data-v]"); if (b) setRating(+b.dataset.v === fbRating ? 0 : +b.dataset.v); });
 $("#fb").addEventListener("click", e => { if (e.target.id === "fb") closeFeedback(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("#fb").hidden) closeFeedback(); });
 document.addEventListener("click", e => {
